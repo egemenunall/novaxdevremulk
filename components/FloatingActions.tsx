@@ -18,7 +18,7 @@ export default function FloatingActions() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const whatsappNumber = '905421316072'; // Format: country code + number without +
+  const whatsappNumber = '905459880337'; // Format: country code + number without +
   const whatsappMessage = 'Merhaba! Devre mülk ilanlarınız hakkında bilgi almak istiyorum.';
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -29,7 +29,7 @@ export default function FloatingActions() {
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        className="group relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
+        className="group relative flex items-center justify-center w-14 h-14 bg-linear-to-br from-green-500 to-green-600 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
         aria-label="WhatsApp ile iletişime geç"
       >
         {/* Pulse animation */}
@@ -50,7 +50,7 @@ export default function FloatingActions() {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="group relative flex items-center justify-center w-14 h-14 bg-gradient-to-br from-blue-600 to-blue-700 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 animate-fadeIn"
+          className="group relative flex items-center justify-center w-14 h-14 bg-linear-to-br from-blue-600 to-blue-700 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300 animate-fadeIn"
           aria-label="Sayfa başına dön"
         >
           <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
