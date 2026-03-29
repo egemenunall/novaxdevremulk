@@ -57,33 +57,78 @@ export default async function ListingPage({ params }: ListingPageProps) {
           <ImageGallery images={listing.images} altText={listing.name} />
 
           {/* Listing Details */}
-          <div className="p-8">
-            <div className="flex items-start justify-between mb-6">
+          <div className="p-5 sm:p-8">
+            <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4 mb-6">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                <p className="text-[12px] text-gray-500 mb-1">
+                  İlan Tarihi: {formattedDate}
+                </p>
+                <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-1">
                   {listing.name}
                 </h1>
-                <p className="text-sm text-gray-500">İlan Tarihi: {formattedDate}</p>
               </div>
               <div className="text-right">
-                <p className="text-3xl font-bold text-blue-600">
+                <p className="text-3xl font-bold text-[#111]">
                   ₺{listing.price.toLocaleString('tr-TR')}
                 </p>
-                <p className="text-lg text-gray-600">{listing.period}</p>
+                <p className="text-sm text-gray-600 mt-1">
+                  {listing.period || 'Dönem bilgisi güncelleniyor'}
+                </p>
               </div>
             </div>
 
-            <div className="border-t border-gray-200 pt-6">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Açıklama</h2>
-              <p className="text-gray-700 whitespace-pre-wrap leading-relaxed">
+            {/* Özellikler Tablosu */}
+            {/* details alanı için: önce Supabase'de supabase-add-listing-details.sql çalıştırılmalı */}
+            {(() => {
+              const d = listing.details || {};
+              const fallbackContract = `LS${listing.id}`;
+              return (
+            <div className="border border-[#f0d6c7]">
+              {[
+                ['Özellik', 'Bilgi'],
+                ['Sözleşme No', d.contract_no || fallbackContract],
+                ['Taşınmaz Türü', d.property_type || 'Devremülk'],
+                ['Tesis Adı', d.facility_name || listing.name],
+                ['Tapu Durumu', d.title_deed_status || 'Belirtilmedi'],
+                ['Oda Tipi', d.room_type || 'Belirtilmedi'],
+                ['Metrekare', d.area_m2 || 'Belirtilmedi'],
+                ['Dönem', d.season || listing.period || 'Belirtilmedi'],
+                ['Kapasite', d.capacity || 'Belirtilmedi'],
+                ['Durumu', d.status || 'Belirtilmedi'],
+                ['Konum', d.location || 'Belirtilmedi'],
+                ['Manzara', d.view || 'Belirtilmedi'],
+                ['Aidat Bilgisi', d.dues || 'Belirtilmedi'],
+                ['Eşya Durumu', d.furnished || 'Belirtilmedi'],
+                ['Kullanım Hakkı', d.usage_right || 'Belirtilmedi'],
+              ].map(([label, value], index) => (
+                <div
+                  key={label}
+                  className="flex flex-col sm:flex-row text-[13px] sm:text-[14px]"
+                >
+                  <div className="sm:w-40 sm:min-w-36 bg-[#fbe0c9] px-2 py-1.5 font-semibold sm:border-r border-white">
+                    {label}
+                  </div>
+                  <div className="flex-1 bg-[#fff5ec] px-2 py-1.5">
+                    {value}
+                  </div>
+                </div>
+              ))}
+            </div>
+              );
+            })()}
+
+            {/* Açıklama */}
+            <div className="mt-6">
+              <h2 className="text-lg font-semibold text-gray-900 mb-3">Açıklama</h2>
+              <p className="text-gray-700 whitespace-pre-wrap leading-relaxed text-sm sm:text-[15px]">
                 {listing.description}
               </p>
             </div>
 
-            {/* İletişim Butonu (İsteğe bağlı) */}
-            <div className="border-t border-gray-200 pt-6 mt-6">
-              <button className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                İletişime Geç
+            {/* İletişim Butonu */}
+            <div className="mt-6">
+              <button className="w-full bg-[#1e73be] text-white py-3 px-6 text-sm font-semibold hover:bg-[#155a90] transition-colors">
+                Emlakçıyla İletişime Geç
               </button>
             </div>
           </div>

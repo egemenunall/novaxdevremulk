@@ -11,6 +11,7 @@ import { useSearchParams } from 'next/navigation';
 function IlanlarContent() {
   const searchParams = useSearchParams();
   const searchQuery = searchParams.get('search');
+  const categoryQuery = searchParams.get('category');
 
   const [listings, setListings] = useState<ListingWithImages[]>([]);
   const [filteredListings, setFilteredListings] = useState<ListingWithImages[]>([]);
@@ -27,13 +28,28 @@ function IlanlarContent() {
       ]);
       setListings(fetchedListings);
       
-      // Arama sorgusuna göre filtrele
-      if (searchQuery) {
-        const filtered = fetchedListings.filter((listing) =>
-          listing.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          listing.description.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-        setFilteredListings(filtered);
+      const applyClientFilters = (items: ListingWithImages[]) => {
+        let next = items;
+        if (searchQuery) {
+          next = next.filter((listing) =>
+            listing.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            listing.description.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+        }
+        if (categoryQuery) {
+          // Şimdilik sadece devre mülk kategorisi gerçek sonuç göstersin.
+          // Diğer kategoriler için alan/şema eklendiğinde burada filtre genişletilebilir.
+          if (categoryQuery === 'devre-mulk') {
+            return next;
+          }
+          return [];
+        }
+        return next;
+      };
+
+      // Arama / kategori filtreleri
+      if (searchQuery || categoryQuery) {
+        setFilteredListings(applyClientFilters(fetchedListings));
       } else {
         setFilteredListings(fetchedListings);
       }
@@ -42,15 +58,30 @@ function IlanlarContent() {
       setLoading(false);
     }
     fetchData();
-  }, [searchQuery]);
+  }, [searchQuery, categoryQuery]);
 
   useEffect(() => {
     async function applyFilters() {
       const filtered = await getListings(currentFilters);
-      setFilteredListings(filtered);
+      let next = filtered;
+      if (searchQuery) {
+        next = next.filter((listing) =>
+          listing.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          listing.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      }
+      if (categoryQuery) {
+        if (categoryQuery === 'devre-mulk') {
+          setFilteredListings(next);
+          return;
+        }
+        setFilteredListings([]);
+        return;
+      }
+      setFilteredListings(next);
     }
     applyFilters();
-  }, [currentFilters]);
+  }, [currentFilters, categoryQuery, searchQuery]);
 
   const handleFilterChange = useCallback((filters: FilterParams) => {
     setCurrentFilters(filters);
@@ -73,7 +104,9 @@ function IlanlarContent() {
             </Link>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            Tüm Devre Mülk İlanları
+            {categoryQuery
+              ? `${categoryQuery.replace(/-/g, ' ').toUpperCase()} Kategorisi`
+              : 'Tüm Devre Mülk İlanları'}
           </h1>
           <p className="text-gray-600 text-lg">
             Size en uygun fırsatları bulun ve filtreyleyin
@@ -126,7 +159,7 @@ function IlanlarContent() {
 
         {/* Listings Grid */}
         {!loading && filteredListings.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6">
             {filteredListings.map((listing) => (
               <ListingCard key={listing.id} listing={listing} />
             ))}
@@ -143,7 +176,9 @@ function IlanlarContent() {
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">İlan bulunamadı</h3>
             <p className="text-gray-600 mb-6 max-w-md mx-auto">
-              Aradığınız kriterlere uygun ilan bulunamadı. Filtreleri değiştirerek tekrar deneyin.
+              {categoryQuery
+                ? 'Bu kategoride şu an aktif ilan bulunamadı.'
+                : 'Aradığınız kriterlere uygun ilan bulunamadı. Filtreleri değiştirerek tekrar deneyin.'}
             </p>
             <button
               onClick={() => window.location.reload()}

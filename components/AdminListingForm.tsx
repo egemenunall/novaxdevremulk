@@ -22,6 +22,22 @@ export default function AdminListingForm({
   const [period, setPeriod] = useState('');
   const [listingDate, setListingDate] = useState('');
   const [isFeatured, setIsFeatured] = useState(false);
+  const [details, setDetails] = useState({
+    contract_no: '',
+    property_type: 'Devremülk',
+    facility_name: '',
+    title_deed_status: '',
+    room_type: '',
+    area_m2: '',
+    season: '',
+    capacity: '',
+    status: '',
+    location: '',
+    view: '',
+    dues: '',
+    furnished: '',
+    usage_right: '',
+  });
   const [images, setImages] = useState<File[]>([]);
   const [existingImages, setExistingImages] = useState<any[]>([]);
   const [deletedImageIds, setDeletedImageIds] = useState<string[]>([]);
@@ -38,6 +54,22 @@ export default function AdminListingForm({
       setPeriod(listing.period);
       setListingDate(listing.listing_date);
       setIsFeatured(listing.is_featured || false);
+      setDetails({
+        contract_no: listing.details?.contract_no || `LS${listing.id}`,
+        property_type: listing.details?.property_type || 'Devremülk',
+        facility_name: listing.details?.facility_name || listing.name,
+        title_deed_status: listing.details?.title_deed_status || '',
+        room_type: listing.details?.room_type || '',
+        area_m2: listing.details?.area_m2 || '',
+        season: listing.details?.season || listing.period || '',
+        capacity: listing.details?.capacity || '',
+        status: listing.details?.status || '',
+        location: listing.details?.location || '',
+        view: listing.details?.view || '',
+        dues: listing.details?.dues || '',
+        furnished: listing.details?.furnished || '',
+        usage_right: listing.details?.usage_right || '',
+      });
       setExistingImages(listing.images || []);
       setDeletedImageIds([]);
     } else {
@@ -46,6 +78,22 @@ export default function AdminListingForm({
       setIsFeatured(false);
       setExistingImages([]);
       setDeletedImageIds([]);
+      setDetails({
+        contract_no: '',
+        property_type: 'Devremülk',
+        facility_name: '',
+        title_deed_status: '',
+        room_type: '',
+        area_m2: '',
+        season: '',
+        capacity: '',
+        status: '',
+        location: '',
+        view: '',
+        dues: '',
+        furnished: '',
+        usage_right: '',
+      });
     }
   }, [listing]);
 
@@ -107,6 +155,14 @@ export default function AdminListingForm({
         period,
         listing_date: listingDate,
         is_featured: isFeatured,
+        details: {
+          ...details,
+          // Ekrandaki tabloda "Dönem" satırı için season dolu değilse period'u kullan
+          season: details.season || period,
+          // facility_name boşsa ilan adını kullan
+          facility_name: details.facility_name || name,
+          // contract_no boşsa LS + id (editte id belli), create'de boş kalabilir
+        },
       };
 
       let listingId: string;
@@ -339,6 +395,156 @@ export default function AdminListingForm({
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
             />
           </div>
+        </div>
+
+        {/* Detay Bilgileri */}
+        <div className="mb-6 border border-gray-200 rounded-lg p-4">
+          <h3 className="text-sm font-semibold text-gray-900 mb-4">Özellik / Bilgi</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Sözleşme No</label>
+              <input
+                type="text"
+                value={details.contract_no}
+                onChange={(e) => setDetails((p) => ({ ...p, contract_no: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: LS1375"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Taşınmaz Türü</label>
+              <input
+                type="text"
+                value={details.property_type}
+                onChange={(e) => setDetails((p) => ({ ...p, property_type: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: Devremülk"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Tesis Adı</label>
+              <input
+                type="text"
+                value={details.facility_name}
+                onChange={(e) => setDetails((p) => ({ ...p, facility_name: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: Valide Sultan Termal Otel & Spa"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Tapu Durumu</label>
+              <input
+                type="text"
+                value={details.title_deed_status}
+                onChange={(e) => setDetails((p) => ({ ...p, title_deed_status: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: Tapulu"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Oda Tipi</label>
+              <input
+                type="text"
+                value={details.room_type}
+                onChange={(e) => setDetails((p) => ({ ...p, room_type: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: 1+1 / 2+1"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Metrekare</label>
+              <input
+                type="text"
+                value={details.area_m2}
+                onChange={(e) => setDetails((p) => ({ ...p, area_m2: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: 70 m²"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Dönem (Sezon)</label>
+              <input
+                type="text"
+                value={details.season}
+                onChange={(e) => setDetails((p) => ({ ...p, season: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: Kış Dönemi"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Kapasite</label>
+              <input
+                type="text"
+                value={details.capacity}
+                onChange={(e) => setDetails((p) => ({ ...p, capacity: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: 4 Kişilik"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Durumu</label>
+              <input
+                type="text"
+                value={details.status}
+                onChange={(e) => setDetails((p) => ({ ...p, status: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: Kullanıma Hazır"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Konum</label>
+              <input
+                type="text"
+                value={details.location}
+                onChange={(e) => setDetails((p) => ({ ...p, location: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: Güdül / Ankara"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Manzara</label>
+              <input
+                type="text"
+                value={details.view}
+                onChange={(e) => setDetails((p) => ({ ...p, view: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: Doğa ve Bahçe Manzarası"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Aidat Bilgisi</label>
+              <input
+                type="text"
+                value={details.dues}
+                onChange={(e) => setDetails((p) => ({ ...p, dues: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: Uygun"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Eşya Durumu</label>
+              <input
+                type="text"
+                value={details.furnished}
+                onChange={(e) => setDetails((p) => ({ ...p, furnished: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: Eşyalı"
+              />
+            </div>
+            <div className="md:col-span-2">
+              <label className="block text-sm font-medium text-gray-700 mb-2">Kullanım Hakkı</label>
+              <input
+                type="text"
+                value={details.usage_right}
+                onChange={(e) => setDetails((p) => ({ ...p, usage_right: e.target.value }))}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Örn: Her yıl 1 hafta"
+              />
+            </div>
+          </div>
+          <p className="mt-3 text-xs text-gray-500">
+            Bu alanlar ilan detay sayfasındaki “Özellik / Bilgi” tablosunda gösterilir.
+          </p>
         </div>
 
         {/* Öne Çıkan İlan */}

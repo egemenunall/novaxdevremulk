@@ -8,6 +8,22 @@ export interface Listing {
   period: string;
   listing_date: string; // ISO date string
   is_featured: boolean;
+  details?: {
+    contract_no?: string;
+    property_type?: string;
+    facility_name?: string;
+    title_deed_status?: string;
+    room_type?: string;
+    area_m2?: string;
+    season?: string;
+    capacity?: string;
+    status?: string;
+    location?: string;
+    view?: string;
+    dues?: string;
+    furnished?: string;
+    usage_right?: string;
+  };
   created_at: string;
 }
 

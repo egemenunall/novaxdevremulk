@@ -19,7 +19,7 @@ export default function HakkimizdaPage() {
             Hakkımızda
           </h1>
           <p className="text-xl text-gray-600">
-            Devre mülk sektöründe güvenilir ve profesyonel hizmet
+            NOVAX Reklam Danışmanlık
           </p>
         </div>
       </div>
@@ -31,13 +31,12 @@ export default function HakkimizdaPage() {
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Hikayemiz</h2>
           <div className="prose prose-lg text-gray-600 space-y-4">
             <p>
-              Lavinia Reklam Pazarlama, Türkiye'nin önde gelen devre mülk platformlarından biridir. 2024 yılında kurulan şirketimiz, 
-              tatil severlerin hayallerindeki tatil evlerine ulaşmalarını kolaylaştırmak amacıyla yola çıktı.
+              NOVAX; reklam ve danışmanlık alanında, markaların dijital ve fiziksel mecralarda daha görünür olmasını sağlamak için
+              çözümler üreten bir ekiptir. İhtiyaca göre strateji, tasarım ve uygulama süreçlerini tek çatı altında yönetir.
             </p>
             <p>
-              Sektördeki deneyimimiz ve müşteri odaklı yaklaşımımızla, binlerce kişinin tatil hayallerini 
-              gerçeğe dönüştürdük. Güven, şeffaflık ve profesyonellik ilkelerimizle hareket ediyor, 
-              her müşterimize en iyi hizmeti sunmayı hedefliyoruz.
+              Şeffaf iletişim, ölçülebilir çıktı ve sürdürülebilir büyüme odağıyla; küçük işletmelerden kurumsal markalara kadar
+              farklı ölçekteki müşterilerimize gerçekçi ve uygulanabilir yol haritaları sunuyoruz.
             </p>
           </div>
         </section>
@@ -45,21 +44,20 @@ export default function HakkimizdaPage() {
         {/* Mission & Vision */}
         <section className="mb-16">
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-blue-50 rounded-xl p-8">
-              <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+            <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
+              <div className="w-12 h-12 bg-gray-900 rounded-lg flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Misyonumuz</h3>
               <p className="text-gray-600">
-                Devre mülk alım-satım sürecini kolaylaştırarak, herkesin hayalindeki tatil evine 
-                güvenli ve şeffaf bir şekilde ulaşmasını sağlamak.
+                Markaların hedef kitlesine doğru mesajla, doğru kanalda ulaşmasını sağlayan pratik ve etkili reklam çözümleri üretmek.
               </p>
             </div>
 
-            <div className="bg-green-50 rounded-xl p-8">
-              <div className="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+            <div className="bg-gray-50 rounded-xl p-8 border border-gray-200">
+              <div className="w-12 h-12 bg-gray-900 rounded-lg flex items-center justify-center mb-4">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
@@ -67,8 +65,7 @@ export default function HakkimizdaPage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Vizyonumuz</h3>
               <p className="text-gray-600">
-                Türkiye'nin en güvenilir ve tercih edilen devre mülk platformu olmak, 
-                sektörde standartları belirleyen lider marka konumuna ulaşmak.
+                Reklam ve danışmanlık alanında, güvenilirliği ve iş disipliniyle tercih edilen bir çözüm ortağı olmak.
               </p>
             </div>
           </div>
@@ -117,44 +114,28 @@ export default function HakkimizdaPage() {
         </section>
 
         {/* Stats */}
-        <section className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-8 md:p-12 text-white">
-          <h2 className="text-2xl font-bold mb-8 text-center">Rakamlarla Lavinia</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2">500+</div>
-              <div className="text-blue-100">Aktif İlan</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2">50+</div>
-              <div className="text-blue-100">Lokasyon</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2">1000+</div>
-              <div className="text-blue-100">Mutlu Müşteri</div>
-            </div>
-            <div className="text-center">
-              <div className="text-4xl font-bold mb-2">4+</div>
-              <div className="text-blue-100">Yıllık Deneyim</div>
-            </div>
+        <section className="bg-[#161616] rounded-2xl p-8 md:p-12 text-white">
+          <h2 className="text-2xl font-bold mb-6 text-center">İletişim</h2>
+          <div className="max-w-2xl mx-auto text-sm text-[#d0d0d0] space-y-3">
+            <p><span className="font-semibold text-white">Telefon:</span> 0545 988 0337</p>
+            <p><span className="font-semibold text-white">E-posta:</span> novaxreklamdanismanlik@gmail.com</p>
+            <p><span className="font-semibold text-white">Adres:</span> Cevizli Mahallesi Bayraktar Sokak 1/3 Nursanlar Apt. Daire:16 Kartal / İstanbul</p>
           </div>
         </section>
 
         {/* CTA */}
         <section className="mt-16 text-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-4">
-            Hayalinizdeki tatil evini bulun
+            NOVAX ile iletişime geçin
           </h2>
           <p className="text-gray-600 mb-8">
-            Geniş ilan havuzumuzdan size en uygun fırsatları keşfedin
+            Projeniz için hızlı bir ön görüşme yapalım.
           </p>
           <Link
-            href="/ilanlar"
-            className="inline-flex items-center justify-center px-8 py-3.5 text-base font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+            href="/iletisim"
+            className="inline-flex items-center justify-center px-8 py-3.5 text-base font-medium text-white bg-gray-900 rounded-lg hover:bg-black transition-colors"
           >
-            Tüm İlanları Görüntüle
-            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
+            İletişim
           </Link>
         </section>
       </div>
