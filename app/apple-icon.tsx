@@ -18,36 +18,27 @@ export default function AppleIcon() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          background: 'linear-gradient(135deg, #3B82F6 0%, #1D4ED8 100%)',
+          background: '#ffffff',
+          border: '1px solid #e5e7eb',
           borderRadius: '40px',
         }}
       >
-        <svg
-          width="120"
-          height="120"
-          viewBox="0 0 100 100"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+        <div
+          style={{
+            width: 120,
+            height: 120,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#111827',
+            fontWeight: 900,
+            fontSize: 96,
+            fontFamily: 'ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial',
+            letterSpacing: '-0.04em',
+          }}
         >
-          {/* Stylized "L" */}
-          <path
-            d="M25 15 L25 75 L70 75 L70 65 L35 65 L35 15 Z"
-            fill="white"
-          />
-          
-          {/* Decorative element - roof/wave */}
-          <path
-            d="M35 15 C45 10, 55 10, 65 15 L65 25 C55 20, 45 20, 35 25 Z"
-            fill="white"
-            opacity="0.8"
-          />
-          
-          {/* Small accent circle */}
-          <circle cx="72" cy="20" r="6" fill="white" />
-          
-          {/* Underline accent */}
-          <rect x="25" y="78" width="45" height="3" rx="1.5" fill="white" opacity="0.6" />
-        </svg>
+          N
+        </div>
       </div>
     ),
     {

@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'Lavinia Reklam Pazarlama - Devre Mülk İlanları',
-  description: 'En uygun devre mülk fırsatlarını keşfedin',
+  title: 'NOVAX REKLAM',
+  description: 'Güncel ilanları keşfedin',
 };
 
 export default function RootLayout({
