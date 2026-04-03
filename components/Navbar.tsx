@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
+import Logo from '@/components/Logo';
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -105,12 +106,15 @@ export default function Navbar() {
 
       <nav className="w-full bg-white border-b border-[#ececec]">
         <div className="max-w-[1260px] mx-auto px-3 sm:px-5">
-          <div className="h-[80px] sm:h-[104px] flex items-center justify-between gap-3 sm:gap-8">
+          <div className="min-h-[104px] h-[104px] sm:min-h-[144px] sm:h-[144px] flex items-center justify-between gap-3 sm:gap-8">
             <Link
               href="/"
-              className="text-[#050505] text-[28px] sm:text-[40px] leading-none font-black tracking-tight whitespace-nowrap"
+              className="shrink-0 flex items-center min-w-0 py-1"
             >
-              NOVAX
+              <Logo
+                className="h-[88px] min-[420px]:h-[96px] sm:h-[128px] w-auto max-w-[min(88vw,360px)] sm:max-w-[min(46vw,520px)] lg:max-w-[560px]"
+                priority
+              />
             </Link>
 
             <form onSubmit={handleSearch} className="hidden lg:block flex-1 max-w-[680px]">

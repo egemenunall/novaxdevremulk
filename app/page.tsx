@@ -161,9 +161,8 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
             <div>
-              <div className="flex items-center gap-3 mb-4">
-                <Logo className="w-9 h-9" />
-                <div className="text-[22px] font-black tracking-tight">NOVAX</div>
+              <div className="inline-flex rounded bg-white/95 px-3 py-2.5 mb-4">
+                <Logo className="h-24 sm:h-28 md:h-32 w-auto max-w-[min(92vw,420px)]" />
               </div>
               <p className="text-[#adadad] text-sm leading-relaxed">
                 Konut, iş yeri ve turistik tesis ilanlarında güvenilir ve güncel portföy.
